@@ -32,6 +32,16 @@ To perform a study on Socket Programming
 •	Examples of functions include socket(), bind(), listen(), accept(), connect(), send(), and recv().
 
 ## Server-Side Operations:
+```
+import socket 
+s=socket.socket() 
+s.connect(('localhost',8000)) 
+print(s.getsockname()) 
+print(s.recv(1024).decode()) 
+s.send("acknowledgement recived from the server".encode())
+```
+##output:
+<img width="1061" height="667" alt="image" src="https://github.com/user-attachments/assets/7fd9d86f-ba82-44dd-b851-dffe1d14588a" />
 
 •	Servers create a socket using socket() and bind it to a specific IP address and port using bind().
 •	They then listen for incoming connections with listen() and accept connections with accept().
@@ -42,6 +52,30 @@ To perform a study on Socket Programming
 
 Clients create a socket using socket() and connect to a server using connect().
 After establishing a connection, clients can send and receive data using send() and recv().
+```
+ import socket
+ from datetime import datetime
+ 
+s=socket.socket()
+ 
+s.bind(('localhost',6000))
+ 
+s.listen(5)
+ c,addr=s.accept()
+ print("Client Address : ",addr)
+ 
+now = datetime.now()
+ 
+c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
+ ack=c.recv(1024).decode()
+ 
+if ack:
+    print(ack)
+ 
+c.close()
+```
+##output
+<img width="1050" height="661" alt="image" src="https://github.com/user-attachments/assets/5c4eb8b2-5819-4a4c-b242-7bf34ec01480" />
 
 ## Use Cases of Socket Programming:
 Socket programming finds applications in various domains, including web development, file transfer protocols, online gaming, and real-time communication. It is the foundation for protocols like HTTP, FTP, and SMTP, which power the internet. Socket programming enables the development of both server and client applications, facilitating the exchange of information between devices in a networked environment.
